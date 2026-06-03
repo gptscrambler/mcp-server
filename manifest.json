@@ -1,0 +1,66 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/schemas/mcpb-manifest-latest.schema.json",
+  "manifest_version": "0.3",
+  "name": "gpt-scrambler",
+  "display_name": "GPT Scrambler",
+  "version": "1.1.0",
+  "description": "Humanize AI-generated text via GPT Scrambler — bypass AI detectors from Claude, Cursor, and other MCP clients.",
+  "long_description": "Connect your GPT Scrambler API key to humanize AI text (10–3,000 words per request) and check your word balance. Uses the same engine and API as gptscrambler.com.",
+  "author": {
+    "name": "GPT Scrambler",
+    "url": "https://gptscrambler.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gptscrambler/mcp-server"
+  },
+  "homepage": "https://gptscrambler.com/en/mcp",
+  "documentation": "https://gptscrambler.com/docs/mcp",
+  "license": "MIT",
+  "keywords": ["mcp", "humanize", "ai", "writing", "gpt-scrambler"],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "GPTSCRAMBLER_API_KEY": "${user_config.api_key}",
+        "GPTSCRAMBLER_API_URL": "${user_config.api_url}"
+      }
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "GPT Scrambler API Key",
+      "description": "Bearer key (sk_live_...) from gptscrambler.com → Settings → API Access",
+      "required": true,
+      "sensitive": true
+    },
+    "api_url": {
+      "type": "string",
+      "title": "API base URL",
+      "description": "Optional. Default: https://gptscrambler.com",
+      "default": "https://gptscrambler.com",
+      "required": false
+    }
+  },
+  "tools": [
+    {
+      "name": "humanize_text",
+      "description": "Humanize AI-generated text to bypass AI detectors. Returns humanized text, words used, and remaining balance."
+    },
+    {
+      "name": "get_balance",
+      "description": "Check remaining word balance, plan, and reset date on GPT Scrambler."
+    }
+  ],
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18"
+    }
+  }
+}

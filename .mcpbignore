@@ -1,0 +1,12 @@
+src/
+scripts/
+node_modules/@anthropic-ai/
+*.ts
+tsconfig.json
+smithery.yaml
+SMITHERY.md
+MONOREPO.md
+PUBLISHING.md
+.turbo/
+*.log
+.git/

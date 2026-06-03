@@ -38,6 +38,8 @@
     "dev": "tsc --watch",
     "start": "node dist/index.js",
     "test:mcp": "node scripts/test-mcp.mjs",
+    "build:mcpb": "node scripts/build-mcpb.mjs",
+    "publish:smithery": "node scripts/publish-smithery.mjs",
     "prepublishOnly": "npm run build",
     "typecheck": "tsc --noEmit"
   },
@@ -48,6 +50,7 @@
     "@modelcontextprotocol/sdk": "^1.29.0"
   },
   "devDependencies": {
+    "@anthropic-ai/mcpb": "^1.1.0",
     "@types/node": "^24.0.8",
     "typescript": "^5.8.3"
   },
