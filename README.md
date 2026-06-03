@@ -52,6 +52,12 @@ Add to `.cursor/mcp.json` (project) or `~/.cursor/mcp.json` (global):
 
 Restart Claude Desktop after saving. Cursor usually picks up config changes automatically.
 
+### Smithery
+
+Install from the [Smithery registry](https://smithery.ai/servers/gptscrambler/mcp-server) (stdio MCPB bundle). Configure your GPT Scrambler API key in Smithery’s UI; it is passed as `GPTSCRAMBLER_API_KEY` to the local server.
+
+Maintainers: see [SMITHERY.md](./SMITHERY.md) for `npm run build:mcpb` and `npm run publish:smithery`.
+
 ## Environment variables
 
 | Variable | Required | Description |
@@ -94,6 +100,7 @@ GPTSCRAMBLER_API_KEY=sk_live_... GPTSCRAMBLER_API_URL=https://gptscrambler.com n
 
 - [Website](https://gptscrambler.com)
 - [MCP & API docs](https://gptscrambler.com/en/mcp)
+- [Smithery](https://smithery.ai/servers/gptscrambler/mcp-server)
 - [REST API reference](https://gptscrambler.com/docs/api)
 - [Source](https://github.com/gptscrambler/mcp-server)
 

@@ -2,11 +2,13 @@
 
 Per [Smithery publish docs](https://smithery.ai/docs/build/publish#local-mcpb-bundle), stdio servers are published as an **MCPB bundle** (not a hosted MCP URL).
 
+**Live server:** https://smithery.ai/servers/gptscrambler/mcp-server
+
 ## Prerequisites
 
-- Node.js 18+
+- Node.js **20+** recommended for `npm run publish:smithery` (Smithery CLI also requires Node 20+)
 - Smithery account: https://smithery.ai
-- npm package `@gptscrambler/mcp-server` published (done)
+- npm package `@gptscrambler/mcp-server` published
 
 ## 1. Build the bundle
 
@@ -38,17 +40,23 @@ npx smithery@latest auth whoami
 npm run publish:smithery
 ```
 
-Equivalent manual command:
+This uses `scripts/smithery-deploy.mjs`, which uploads the MCPB with a full **server card** (tool `inputSchema` fields). The stock `smithery mcp publish` command alone can fail with HTTP 400 until Smithery/MCPB align on tool schemas in the manifest.
+
+## Troubleshooting
+
+### `` `File` is not defined as a global ``
+
+Your default `node` is **older than 20** (common on Ubuntu: `/usr/bin/node` is 18). Smithery’s CLI needs the global `File` API for uploads.
+
+- Prefer: `node -v` ≥ 20, then `npm run publish:smithery`
+- Or install Node 20 via nvm/fnm and use that binary for publish
+
+### `Invalid input: expected object, received undefined` (HTTP 400)
+
+Smithery’s API requires each tool in the deploy **payload** to include an `inputSchema` object. MCPB `manifest.json` does not allow `inputSchema` on tools (validator rejects it), so use **`npm run publish:smithery`** (custom deploy) instead of raw:
 
 ```bash
 npx smithery@latest mcp publish ./dist-bundle/server.mcpb -n gptscrambler/mcp-server
-```
-
-Optional config schema (same as `smithery.yaml`):
-
-```bash
-npx smithery@latest mcp publish ./dist-bundle/server.mcpb -n gptscrambler/mcp-server \
-  --config-schema '{"type":"object","required":["gptscramblerApiKey"],"properties":{"gptscramblerApiKey":{"type":"string","title":"GPT Scrambler API Key"},"gptscramblerApiUrl":{"type":"string","default":"https://gptscrambler.com"}}}'
 ```
 
 ## What users get
@@ -67,5 +75,7 @@ The form at [smithery.ai/new](https://smithery.ai/new) that asks for **MCP Serve
 |------|---------|
 | `manifest.json` | MCPB manifest (tools, user_config, env mapping) |
 | `scripts/build-mcpb.mjs` | Stage + pack bundle |
-| `scripts/publish-smithery.mjs` | Publish to Smithery after login |
+| `scripts/publish-smithery.mjs` | Publish entry (auth check + deploy) |
+| `scripts/smithery-deploy.mjs` | API deploy with complete server card |
+| `scripts/smithery-server-card.mjs` | Tool `inputSchema` definitions for Smithery |
 | `smithery.yaml` | Legacy/alternate Smithery GitHub config (optional) |

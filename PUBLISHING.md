@@ -39,6 +39,18 @@ README includes a hidden registry line for PyPI-style verification on other regi
 
 Install the publisher CLI and follow: https://modelcontextprotocol.io/registry/publishing
 
+## Smithery (MCPB bundle)
+
+Published server: https://smithery.ai/servers/gptscrambler/mcp-server
+
+```bash
+npm run build:mcpb
+npx smithery@latest auth login
+npm run publish:smithery
+```
+
+Use `npm run publish:smithery` (not raw `smithery mcp publish` alone). See [SMITHERY.md](./SMITHERY.md) for Node 20+ notes and HTTP 400 troubleshooting.
+
 ## Catalogs (mcp.so, Pulse MCP, etc.)
 
 - Keep repo **public** with MIT `LICENSE`
