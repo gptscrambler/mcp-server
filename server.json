@@ -1,0 +1,32 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.gptscrambler/mcp-server",
+  "description": "Humanize AI-generated text via GPT Scrambler API (Claude, Cursor, MCP clients)",
+  "version": "1.1.0",
+  "repository": {
+    "url": "https://github.com/gptscrambler/mcp-server",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@gptscrambler/mcp-server",
+      "version": "1.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "GPTSCRAMBLER_API_KEY",
+          "description": "Bearer API key from https://gptscrambler.com/app/settings/api-access",
+          "required": true
+        },
+        {
+          "name": "GPTSCRAMBLER_API_URL",
+          "description": "API base URL (default: https://gptscrambler.com)",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

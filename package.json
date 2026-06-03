@@ -1,0 +1,57 @@
+{
+  "name": "@gptscrambler/mcp-server",
+  "version": "1.1.0",
+  "description": "MCP server for GPT Scrambler — humanize AI text in Claude Desktop, Cursor, and other MCP clients",
+  "mcpName": "io.github.gptscrambler/mcp-server",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "humanize",
+    "ai",
+    "gpt-scrambler",
+    "claude",
+    "cursor"
+  ],
+  "homepage": "https://gptscrambler.com/en/mcp",
+  "bugs": {
+    "url": "https://github.com/gptscrambler/mcp-server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gptscrambler/mcp-server.git"
+  },
+  "license": "MIT",
+  "author": "GPT Scrambler",
+  "type": "module",
+  "bin": {
+    "gptscrambler-mcp": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "test:mcp": "node scripts/test-mcp.mjs",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.8",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
