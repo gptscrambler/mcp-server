@@ -90,6 +90,8 @@ Returns remaining word balance, plan, and reset date (same as `GET /api/v1/balan
 
 ## Development
 
+Maintainers: see [DEVELOPMENT.md](./DEVELOPMENT.md) and the monorepo guide [docs/mcp-server.md](https://github.com/andrew-bush-a17/new-scrambler/blob/main/docs/mcp-server.md) (architecture, sync flow, publishing).
+
 ```bash
 npm ci
 npm run build
