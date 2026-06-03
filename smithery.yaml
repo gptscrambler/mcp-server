@@ -1,0 +1,48 @@
+# Smithery registry config — stdio server (no hosted MCP URL required)
+# Docs: https://smithery.ai/docs/build/publish
+
+name: gpt-scrambler
+description: Humanize AI-generated text via GPT Scrambler API. Tools for rewriting and balance checks in Claude, Cursor, and other MCP clients.
+homepage: https://gptscrambler.com/en/mcp
+repository: https://github.com/gptscrambler/mcp-server
+license: MIT
+
+categories:
+  - productivity
+  - writing
+
+tags:
+  - humanize
+  - ai-detection
+  - writing
+  - api
+  - gpt-scrambler
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - gptscramblerApiKey
+    properties:
+      gptscramblerApiKey:
+        type: string
+        title: GPT Scrambler API Key
+        description: Bearer API key (sk_live_...) from Settings → API Access at gptscrambler.com
+      gptscramblerApiUrl:
+        type: string
+        title: API base URL
+        description: Optional. Defaults to https://gptscrambler.com
+        default: https://gptscrambler.com
+  commandFunction: |-
+    (config) => ({
+      command: 'npx',
+      args: ['-y', '@gptscrambler/mcp-server'],
+      env: {
+        GPTSCRAMBLER_API_KEY: config.gptscramblerApiKey,
+        ...(config.gptscramblerApiUrl ? { GPTSCRAMBLER_API_URL: config.gptscramblerApiUrl } : {}),
+      },
+    })
+  exampleConfig:
+    gptscramblerApiKey: sk_live_your_key_here
+    gptscramblerApiUrl: https://gptscrambler.com
